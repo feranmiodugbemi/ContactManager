@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-
+import faunadb
 app = Flask(__name__)
 
 @app.route("/")
