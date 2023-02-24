@@ -7,6 +7,7 @@ import os
 
 load_dotenv()
 app = Flask(__name__)
+app.config["SECRET_KEY"]='Feranmiodugbemi'
 
 client = FaunaClient(
   secret=os.getenv('FAUNASECRET')
@@ -37,6 +38,7 @@ def hello():
                 }
             )
         )
+        flash("New contact added successfully", category="success")
         return redirect('/')
     else:
         #Getting all the contacts
@@ -55,6 +57,30 @@ def delete(id):
     contact = q.ref(q.collection("Users"), id)
     client.query(q.delete(contact))
     return redirect('/')
+
+@app.route('/update/<int:id>', methods=["POST"])
+def update(id):
+    id = id + 1024
+    if request.method == "POST":
+        name = request.form.get('updatename')
+        occupation = request.form.get('updateoccupation', default='')
+        address = request.form.get('updateaddress', default='')
+        contact = request.form.get('updatecontact')
+        email = request.form.get('updateemail', default='')
+        doc_ref = q.ref(q.collection("Users"), id)
+        client.query(
+            q.update(doc_ref, {
+                'data':{
+                    'name':name,
+                    'occupation':occupation,
+                    'address' : address,
+                    'contact': contact,
+                    'email': email
+                }
+            })
+        )
+    return redirect('/')
+
 
 
 if __name__ == "__main__":

@@ -11,21 +11,74 @@
       href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
       rel="stylesheet"
     />
-	
 
-    <link rel="stylesheet" href="static/css-table-16/css-table-16/css/owl.carousel.min.css" />
+    <link
+      rel="stylesheet"
+      href="static/css-table-16/css-table-16/css/owl.carousel.min.css"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="static/css-table-16/css-table-16/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="static/css-table-16/css-table-16/css/bootstrap.min.css"
+    />
 
     <!-- Style -->
-    <link rel="stylesheet" href="static/css-table-16/css-table-16/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="static/css-table-16/css-table-16/css/style.css"
+    />
   </head>
   <body>
-    <h1 class="text-center text-white" style="margin-right: 200px;">Faunadb contact manager</h1>
+    <h1 class="text-center text-white" style="margin-right: 200px">
+      Faunadb contact manager
+    </h1>
     <div class="content">
       <div class="container">
-        <button type="button" class="btn btn-outline-primary float-right"  data-toggle="modal" data-target="#exampleModalCenter">Create contact</button>
+        <!-- flashing errors -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %} {% if category ==
+        "error" %}
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
+          {{message}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% else %}
+        <div
+          class="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          {{message}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
+        <!-- end of flashing errors -->
+        <button
+          type="button"
+          class="btn btn-outline-primary float-right"
+          data-toggle="modal"
+          data-target="#FormModalCenter"
+        >
+          Create contact
+        </button>
         <div class="table-responsive">
           <table class="table table-striped custom-table">
             <thead>
@@ -40,48 +93,67 @@
               </tr>
             </thead>
             <tbody>
-              <tr scope="row">
-                <td><img class="rounded-circle shadow-4-strong" alt="avatar2" src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" width="50px" height="50px" /></td>
-                <td><a href="#">James Yates</a></td>
+              {% if data|length > 0 %} {% for data in data %}
+              <tr id="{{data.id}}" scope="row">
                 <td>
-                  Web Designer
-                  <small class="d-block"
-                    >Far far away, behind the word mountains</small
-                  >
+                  <img
+                    class="rounded-circle shadow-4-strong"
+                    alt="avatar1"
+                    src="https://mdbcdn.b-cdn.net/img/new/avatars/9.webp"
+                    width="50px"
+                    height="50px"
+                  />
                 </td>
-                <td>+63 983 0962 971</td>
-                <td>feranmiodugbemi@email.com</td>
-                <td><button type="button" class="btn btn-outline-warning"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                  <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                </svg></button></td>
-                <td><button type="button" class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                </svg></button></td>
-              </tr>
-              {% if data|length > 0 %}
-              {% for data in data %}
-              <tr id="{{data.id}}">
-                <td><img class="rounded-circle shadow-4-strong" alt="avatar1" src="https://mdbcdn.b-cdn.net/img/new/avatars/9.webp" width="50px" height="50px" /></td>
                 <td><a href="#">{{data.name}}</a></td>
                 <td>
                   {{data.occupation}}
-                  <small class="d-block"
-                    >{{data.address}}</small
-                  >
+                  <small class="d-block">{{data.address}}</small>
                 </td>
                 <td>{{data.contact}}</td>
                 <td>{{data.email}}</td>
-                <td><button type="button" class="btn btn-outline-warning"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                  <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                </svg></button></td>
-                <td><button type="button" onclick="window.location.href='/delete/{{data.id}}'" class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                </svg></button></td> 
+                <td>
+                  <button type="button" class="btn btn-outline-warning" 
+                    data-toggle="modal"
+                    data-target="#UpdateModalCenter">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-pen"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
+                      />
+                    </svg>
+                  </button>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    onclick="window.location.href='/delete/{{data.id}}'"
+                    class="btn btn-outline-danger"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-trash3"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
+                      />
+                    </svg>
+                  </button>
+                </td>
               </tr>
-              {% endfor %}
-
-              {% else %}
-                <h1 class="text-center text-white"> You have no contact list yet</h1>
+              {% endfor %} {% else %}
+              <h1 class="text-center text-white">
+                You have no contact list yet
+              </h1>
               {% endif %}
             </tbody>
           </table>
@@ -89,62 +161,225 @@
       </div>
     </div>
 
-
-
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form method="post" action="/">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+    <div
+      class="modal fade"
+      id="FormModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Contact form</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="/">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupFileAddon01"
+                    >Upload</span
+                  >
+                </div>
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01"
+                  />
+                  <label class="custom-file-label" for="inputGroupFile01"
+                    >Choose file</label
+                  >
+                </div>
               </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                  aria-describedby="inputGroupFileAddon01">
-                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              <div class="form-group">
+                <label for="exampleInputName">Name:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputName"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter Name"
+                  name="name"
+                  required
+                />
               </div>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputName">Name:</label>
-              <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
-                placeholder="Enter Name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputOccupation">Occupation:</label>
-              <input type="text" class="form-control" id="exampleInputOccupation" aria-describedby="emailHelp"
-                placeholder="Enter Occupation" name="occupation">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputAddress">Address:</label>
-              <input type="text" class="form-control" id="exampleInputAddress" aria-describedby="emailHelp"
-                placeholder="Enter Address" name="address">
-            </div>
-            <div class="form-group">
-              <label for="exampleInpuContact">Contact:</label>
-              <input type="tel" class="form-control" id="exampleInpuContact" aria-describedby="emailHelp"
-                placeholder="Enter Phonenumber" name="contact" required>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail">Email:</label>
-              <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter Email" name="email">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+              <div class="form-group">
+                <label for="exampleInputOccupation">Occupation:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputOccupation"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter Occupation"
+                  name="occupation"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputAddress">Address:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputAddress"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter Address"
+                  name="address"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInpuContact">Contact:</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="exampleInpuContact"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter Phonenumber"
+                  name="contact"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail">Email:</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail"
+                  placeholder="Enter Email"
+                  name="email"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  
+
+
+
+
+
+    {% for data in data %}
+    <div
+      class="modal fade"
+      id="UpdateModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Update form</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="/update/{{data.id}}">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="updateinputGroupFileAddon01"
+                    >Upload</span
+                  >
+                </div>
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="updateinputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01"
+                  />
+                  <label class="custom-file-label" for="updateinputGroupFile01"
+                    >Choose file</label
+                  >
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="UpdateInputName">Name:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="UpdateInputName"
+                  aria-describedby="emailHelp"
+                  placeholder="Update Name"
+                  name="updatename"
+                  value="{{data.name}}"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="UpdateInputOccupation">Occupation:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="UpdateInputOccupation"
+                  aria-describedby="emailHelp"
+                  placeholder="Update Occupation"
+                  name="updateoccupation"
+                  value="{{data.occupation}}"
+                />
+              </div>
+              <div class="form-group">
+                <label for="UpdateInputAddress">Address:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="UpdateInputAddress"
+                  aria-describedby="emailHelp"
+                  placeholder="Update Address"
+                  name="updateaddress"
+                  value="{{data.address}}"
+                />
+              </div>
+              <div class="form-group">
+                <label for="UpdateInpuContact">Contact:</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="UpdateInpuContact"
+                  aria-describedby="emailHelp"
+                  placeholder="Update Phonenumber"
+                  name="updatecontact"
+                  value="{{data.contact}}"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="UpdateInputEmail">Email:</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="UpdateInputEmail"
+                  placeholder="Update Email"
+                  name="updateemail"
+                  value="{{data.email}}"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
     <script src="static/css-table-16/css-table-16/js/jquery-3.3.1.min.js"></script>
     <script src="static/css-table-16/css-table-16/js/popper.min.js"></script>
     <script src="static/css-table-16/css-table-16/js/bootstrap.min.js"></script>
