@@ -11,8 +11,7 @@
       href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="static/css-table-16/css-table-16/fonts/icomoon/style.css" />
+	
 
     <link rel="stylesheet" href="static/css-table-16/css-table-16/css/owl.carousel.min.css" />
 
@@ -26,6 +25,7 @@
     <h1 class="text-center text-white" style="margin-right: 200px;">Faunadb contact manager</h1>
     <div class="content">
       <div class="container">
+        <button type="button" class="btn btn-outline-primary float-right"  data-toggle="modal" data-target="#exampleModalCenter">Create contact</button>
         <div class="table-responsive">
           <table class="table table-striped custom-table">
             <thead>
@@ -82,8 +82,63 @@
         </div>
       </div>
     </div>
-    
 
+
+
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName">Name:</label>
+              <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
+                placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputOccupation">Occupation:</label>
+              <input type="text" class="form-control" id="exampleInputOccupation" aria-describedby="emailHelp"
+                placeholder="Enter Occupation">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputAddress">Address:</label>
+              <input type="text" class="form-control" id="exampleInputAddress" aria-describedby="emailHelp"
+                placeholder="Enter Address">
+            </div>
+            <div class="form-group">
+              <label for="exampleInpuContact">Email Contact:</label>
+              <input type="number" class="form-control" id="exampleInpuContact" aria-describedby="emailHelp"
+                placeholder="Enter Phonenumber" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
     <script src="static/css-table-16/css-table-16/js/jquery-3.3.1.min.js"></script>
     <script src="static/css-table-16/css-table-16/js/popper.min.js"></script>
     <script src="static/css-table-16/css-table-16/js/bootstrap.min.js"></script>
