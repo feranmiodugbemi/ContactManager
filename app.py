@@ -13,7 +13,6 @@ client = FaunaClient(
 )
 
 
-
 @app.route("/", methods=["POST", "GET"])
 def hello():
     #Creating a new contact
@@ -49,9 +48,6 @@ def hello():
         )
         data = [doc["data"] for doc in result["data"]]
         return render_template('index.html', data=data)
-
-
-
 
 
 
