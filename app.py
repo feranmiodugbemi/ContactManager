@@ -49,6 +49,12 @@ def hello():
         data = [doc["data"] for doc in result["data"]]
         return render_template('index.html', data=data)
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    id = id + 1024
+    contact = q.ref(q.collection("Users"), id)
+    client.query(q.delete(contact))
+    return redirect('/')
 
 
 if __name__ == "__main__":
