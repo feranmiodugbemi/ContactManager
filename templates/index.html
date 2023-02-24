@@ -96,7 +96,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form method="post" action="/">
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
@@ -110,26 +110,26 @@
             <div class="form-group">
               <label for="exampleInputName">Name:</label>
               <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
-                placeholder="Enter Name" required>
+                placeholder="Enter Name" name="name" required>
             </div>
             <div class="form-group">
               <label for="exampleInputOccupation">Occupation:</label>
               <input type="text" class="form-control" id="exampleInputOccupation" aria-describedby="emailHelp"
-                placeholder="Enter Occupation">
+                placeholder="Enter Occupation" name="occupation">
             </div>
             <div class="form-group">
               <label for="exampleInputAddress">Address:</label>
               <input type="text" class="form-control" id="exampleInputAddress" aria-describedby="emailHelp"
-                placeholder="Enter Address">
+                placeholder="Enter Address" name="address">
             </div>
             <div class="form-group">
-              <label for="exampleInpuContact">Email Contact:</label>
-              <input type="number" class="form-control" id="exampleInpuContact" aria-describedby="emailHelp"
-                placeholder="Enter Phonenumber" required>
+              <label for="exampleInpuContact">Contact:</label>
+              <input type="tel" class="form-control" id="exampleInpuContact" aria-describedby="emailHelp"
+                placeholder="Enter Phonenumber" name="contact" required>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <label for="exampleInputEmail">Email:</label>
+              <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter Email" name="email">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

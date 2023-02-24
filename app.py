@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect
 from faunadb import query as q
 from faunadb.objects import Ref
 from faunadb.client import FaunaClient
@@ -17,23 +17,29 @@ client = FaunaClient(
 @app.route("/", methods=["POST", "GET"])
 def hello():
     if request.method == "POST":
+        name = request.form.get('name')
+        occupation = request.form.get('occupation', default='')
+        address = request.form.get('address', default='')
+        contact = request.form.get('contact')
+        email = request.form.get('email', default='')
         client.query(
             q.create(
                 q.ref('collections/Users'),
                 {
                     'data':{
                         'id': q.new_id(),
-                        'name':"Feranmi",
-                        'occupation':'CEO',
-                        'address' : "Block 200, Alaka",
-                        'contact': "+234 816 043 5459",
-                        'email': 'feranmi@email.com'
+                        'name':name,
+                        'occupation':occupation,
+                        'address' : address,
+                        'contact': contact,
+                        'email': email
                     }
                 }
             )
         )
-    else:
-        return render_template('index.html')
+        
+        return redirect('/')
+    return render_template('index.html')
 
 
 
