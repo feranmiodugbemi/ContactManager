@@ -16,6 +16,7 @@ client = FaunaClient(
 
 @app.route("/", methods=["POST", "GET"])
 def hello():
+    #Creating a new contact
     if request.method == "POST":
         name = request.form.get('name')
         occupation = request.form.get('occupation', default='')
@@ -37,9 +38,17 @@ def hello():
                 }
             )
         )
-        
         return redirect('/')
-    return render_template('index.html')
+    else:
+        #Getting all the contacts
+        result = client.query(
+            q.map_(
+                q.lambda_("x", q.get(q.var("x"))),
+                q.paginate(q.documents(q.collection("Users")))
+            )
+        )
+        data = [doc["data"] for doc in result["data"]]
+        return render_template('index.html', data=data)
 
 
 
