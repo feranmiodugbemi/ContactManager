@@ -23,7 +23,7 @@ def hello():
         address = request.form.get('address', default='')
         contact = request.form.get('contact')
         email = request.form.get('email', default='')
-        client.query(
+        result = client.query(
             q.create(
                 q.ref('collections/Users'),
                 {
@@ -38,6 +38,7 @@ def hello():
                 }
             )
         )
+        print(result['ref'].id())
         flash("New contact added successfully", category="success")
         return redirect('/')
     else:
