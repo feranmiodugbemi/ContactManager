@@ -54,27 +54,31 @@ def hello():
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    id = id + 1024
-    contact = q.ref(q.collection("Users"), id)
-    client.query(q.delete(contact))
+    id = str(id)
+    result = client.query(
+        q.select(['ref'], q.get(q.match(q.index("users_by_id"), id)))
+    )
+    client.query(q.delete(result))
     return redirect('/')
 
 @app.route('/update/<int:id>', methods=["POST"])
 def update(id):
-    id = id + 1024
+    id = str(id)
     if request.method == "POST":
         name = request.form.get('updatename')
         occupation = request.form.get('updateoccupation', default='')
         address = request.form.get('updateaddress', default='')
         contact = request.form.get('updatecontact')
         email = request.form.get('updateemail', default='')
-        doc_ref = q.ref(q.collection("Users"), id)
+        result = client.query(
+            q.select(['ref'], q.get(q.match(q.index("users_by_id"), id)))
+        )
         client.query(
-            q.update(doc_ref, {
+            q.update(result, {
                 'data':{
-                    'name':name,
-                    'occupation':occupation,
-                    'address' : address,
+                    'name': name,
+                    'occupation': occupation,
+                    'address': address,
                     'contact': contact,
                     'email': email
                 }
